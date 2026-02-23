@@ -1,0 +1,72 @@
+#root {
+  color: white;
+}
+
+.canvas{
+  box-sizing: border-box;
+
+  display: flex;
+  flex-grow: 1;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: center;
+
+  gap: 2px;
+  width: 100px;
+  height: 100%;
+}
+
+.arrayBar {
+  background-color: red;
+  /* Esto hace que la barra ocupe el espacio horizontal sobrante */
+  flex: 1; 
+  /* Evita que el texto interno estire la barra hacia arriba */
+  overflow: hidden; 
+  /* Opcional: centra el texto si lo vas a dejar */
+  text-align: center;
+  font-size: 10px;
+}
+
+.algoButton{
+  color: white;
+}
+
+.sidebarAlgorithms{
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarAlgorithms button{
+  padding: 6px 12px;
+}
+
+.sidebarAlgorithms h4{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sidebarComponent{
+  padding: 1rem;
+}
+
+.parameterSlider{
+  display: flex;
+  flex-direction: column;
+}
+
+.parameterInfo{
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  input{
+    border: none;
+    width: 100px;
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 2px 8px;
+    background-color: #262a33;
+  }
+}
