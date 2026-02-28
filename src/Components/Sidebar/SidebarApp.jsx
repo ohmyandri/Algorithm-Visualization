@@ -1,14 +1,28 @@
 import React from "react";
 import SidebarHeader from "./SidebarHeader.jsx";
+import SidebarActions from "./SidebarActions.jsx";
 import SidebarAlgorithms from "./SidebarAlgorithms.jsx";
 import SidebarParameters from "./SidebarParameters.jsx";
 
-function SidebarApp({sizeValue, handleSizeChange, speedValue, handleSpeedChange}) {
+function SidebarApp({
+  sizeValue,
+  handleSizeChange,
+  speedValue,
+  handleSpeedChange,
+  resetArray
+}) {
   return (
-    <form className="sidebarComponent">
+    <div
+      className="sidebarComponent"
+      style={{
+        padding: "25px 24px",
+      }}
+    >
+      {/* Sidebar Header, with the logo and stuff */}
+      <SidebarHeader></SidebarHeader>
+      
+      {/* Section with the algorithms selector */}
       <section>
-        <SidebarHeader></SidebarHeader>
-
         <div className="sidebarAlgorithms">
           <h4>
             <span className="material-symbols-outlined">memory</span>
@@ -22,7 +36,11 @@ function SidebarApp({sizeValue, handleSizeChange, speedValue, handleSpeedChange}
           <SidebarAlgorithms value="Quick Sort"></SidebarAlgorithms>
           <SidebarAlgorithms value="Radix Sort"></SidebarAlgorithms>
         </div>
+      </section>
 
+      {/* Section with the parameters selector */}
+      <section>
+        <h1>Hello</h1>
         {/* Array Size */}
         <SidebarParameters
           sliderValue={sizeValue}
@@ -30,8 +48,8 @@ function SidebarApp({sizeValue, handleSizeChange, speedValue, handleSpeedChange}
           minValue={10}
           maxValue={100}
           step={10}
-          handleChange = {handleSizeChange} 
-          ></SidebarParameters>
+          handleChange={handleSizeChange}
+        ></SidebarParameters>
 
         {/* Speed of the animations */}
         <SidebarParameters
@@ -40,10 +58,16 @@ function SidebarApp({sizeValue, handleSizeChange, speedValue, handleSpeedChange}
           maxValue={5}
           step={1}
           sliderValue={speedValue}
-          handleChange = {handleSpeedChange} 
+          handleChange={handleSpeedChange}
         ></SidebarParameters>
       </section>
-    </form>
+
+      {/* Section dedicated to te actions of the sidebar, run, step by step, reset array, etc */}
+      <section
+      >
+        <SidebarActions resetArrayOnClick = {resetArray}></SidebarActions>
+      </section>
+    </div>
   );
 }
 

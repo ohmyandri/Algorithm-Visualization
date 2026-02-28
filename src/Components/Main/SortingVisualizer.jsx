@@ -27,6 +27,7 @@ export default function SortingVisualizer() {
         handleSizeChange={setArraySize}
         speedValue={animationSpeed}
         handleSpeedChange={setAnimationSpeed}
+        resetArray = {resetArray}
       />
       <CanvasComponent array={array}></CanvasComponent>
     </>
