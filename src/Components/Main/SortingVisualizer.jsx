@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CanvasComponent from "./CanvasComponent.jsx";
 import SidebarApp from "../Sidebar/SidebarApp.jsx";
 import { bubbleSort } from "../../../Helpers/BubbleSort.js";
+import { insertionSort } from "../../../Helpers/InsertionSort.js";
 
 export default function SortingVisualizer() {
   //UseState to make it easier deactivate buttons when algorithm is running
@@ -58,7 +59,11 @@ export default function SortingVisualizer() {
     //We call the algorithm selected
     switch (controls.algorithm) {
       case "Bubble Sort":
-        await bubbleSort(array, setArray, animationSpeed);
+        await bubbleSort(array, animationSpeed);
+        break;
+
+      case "Insertion Sort":
+        await insertionSort(array, animationSpeed);
         break;
 
       default:

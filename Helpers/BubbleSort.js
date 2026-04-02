@@ -1,11 +1,9 @@
 import { sleep } from "./sleepHelper.js";
 
-export const bubbleSort = async (array, setArray, speed) => {
+export const bubbleSort = async (array, speed) => {
     const bars = document.querySelectorAll(".arrayBar");
 
     for (var i = 0; i < array.length; i++) {
-        // Last i elements are already in place  
-
         // Start the j loop
         for (var j = 0; j < (array.length - i - 1); j++) {
             // Red color to the bars that are being compared
