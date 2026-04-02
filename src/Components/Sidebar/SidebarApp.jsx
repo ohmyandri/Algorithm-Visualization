@@ -1,12 +1,10 @@
-import React from "react";
-import SidebarHeader from "./SidebarHeader.jsx";
 import SidebarActions from "./SidebarActions.jsx";
 import SidebarAlgorithms from "./SidebarAlgorithms.jsx";
 import SidebarParameters from "./SidebarParameters.jsx";
 
 function SidebarApp({ controls, resetArray, runAlgorithm }) {
   //Destructuring the objects:
-  const { size, setSize, speed, setSpeed, algorithm, setAlgorithm } = controls;
+  const { size, setSize, speed, setSpeed, algorithm, setAlgorithm, runningState } = controls;
 
   //Refactor to the buttons:
   const algorithmsList = [
@@ -19,13 +17,11 @@ function SidebarApp({ controls, resetArray, runAlgorithm }) {
 
   return (
     <div
-      className="sidebarComponent"
+      className={`sidebarComponent ${runningState ? "disabled-ui" : ""}`}
       style={{
         padding: "25px 24px",
       }}
     >
-      {/* Sidebar Header, with the logo and stuff */}
-      <SidebarHeader></SidebarHeader>
 
       {/* Section with the algorithms selector */}
       <section>
@@ -73,8 +69,7 @@ function SidebarApp({ controls, resetArray, runAlgorithm }) {
       </section>
 
       {/* Section dedicated to te actions of the sidebar, run, step by step, reset array, etc */}
-      <section
-      >
+      <section>
         <SidebarActions resetArrayOnClick={resetArray} runAlgorithmOnClick={runAlgorithm}></SidebarActions>
       </section>
     </div>

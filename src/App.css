@@ -144,3 +144,8 @@
   flex-direction: column;
   gap: 12px;
 }
+
+.disabled-ui {
+  pointer-events: none;
+  opacity: 0.5;
+}

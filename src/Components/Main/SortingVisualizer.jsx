@@ -1,22 +1,38 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CanvasComponent from "./CanvasComponent.jsx";
 import SidebarApp from "../Sidebar/SidebarApp.jsx";
+import { bubbleSort } from "../../../Helpers/BubbleSort.js";
 
 export default function SortingVisualizer() {
+  //UseState to make it easier deactivate buttons when algorithm is running
+  const [isRunning, setIsRunning] = useState(false);
+
   //Array of the numbers to be sorted
   const [array, setArray] = useState([]);
 
+  //Algorithm selected
   const [selectedAlgorithm, setSelectedAlgorithm] = useState("");
+
   //Size of the array using state
   const [arraySize, setArraySize] = useState(10);
+
   //Speed of the animation using state
-  const [animationSpeed, setAnimationSpeed] = useState(2);
+  const [animationSpeed, setAnimationSpeed] = useState(1);
 
   function resetArray() {
     const array = [];
+
+    //Generate random numbers
     for (let i = 0; i < arraySize; i++) {
       array.push(randomInt(10, 1000));
     }
+
+    //Update the array color
+    const bars = document.querySelectorAll(".arrayBar");
+    bars.forEach((bar) => {
+      bar.style.backgroundColor = "turquoise";
+    });
+
     setArray(array);
   }
 
@@ -30,18 +46,28 @@ export default function SortingVisualizer() {
     speed: animationSpeed,
     setSpeed: setAnimationSpeed,
     algorithm: selectedAlgorithm,
-    setAlgorithm: setSelectedAlgorithm
+    setAlgorithm: setSelectedAlgorithm,
+    runningState: isRunning,
+    setRunningState: setIsRunning
   };
 
-  function runAlgorithm() {
-    if (controls.algorithm === "") {
-      alert("Please select an algorithm first.");
-      return;
+  async function runAlgorithm() {
+    //We set the is running to true, so the user cannot interact with the UI
+    setIsRunning(true);
+
+    //We call the algorithm selected
+    switch (controls.algorithm) {
+      case "Bubble Sort":
+        await bubbleSort(array, setArray, animationSpeed);
+        break;
+
+      default:
+        alert("Please select an algorithm first.");
+        break;
     }
-    else {
-      console.log("Array size: %s, Speed: %s, Algorithm: %s", controls.size, controls.speed, controls.algorithm);
-    }
-    // Aquí irá la ejecución real más adelante...
+
+    //We set the is running to false
+    setIsRunning(false);
   }
 
   return (

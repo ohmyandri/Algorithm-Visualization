@@ -21,7 +21,7 @@ export default function SidebarActions({ resetArrayOnClick, runAlgorithmOnClick 
           className="actionBtn resetArrayBtn"
           onClick={resetArrayOnClick}
         >
-          <span>P </span>
+          <span className="material-symbols-outlined">refresh</span>
           <span>Reset</span>
         </button>
       </div>
