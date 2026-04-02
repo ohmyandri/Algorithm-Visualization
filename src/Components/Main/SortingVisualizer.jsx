@@ -35,7 +35,7 @@ export default function SortingVisualizer() {
 
   function runAlgorithm() {
     if (controls.algorithm === "") {
-      alert("Por favor selecciona un algoritmo primero.");
+      alert("Please select an algorithm first.");
       return;
     }
     else {
