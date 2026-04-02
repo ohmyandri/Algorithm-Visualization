@@ -3,9 +3,13 @@ import CanvasComponent from "./CanvasComponent.jsx";
 import SidebarApp from "../Sidebar/SidebarApp.jsx";
 
 export default function SortingVisualizer() {
+  //Array of the numbers to be sorted
   const [array, setArray] = useState([]);
 
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("");
+  //Size of the array using state
   const [arraySize, setArraySize] = useState(10);
+  //Speed of the animation using state
   const [animationSpeed, setAnimationSpeed] = useState(2);
 
   function resetArray() {
@@ -20,14 +24,32 @@ export default function SortingVisualizer() {
     resetArray();
   }, [arraySize]);
 
+  const controls = {
+    size: arraySize,
+    setSize: setArraySize,
+    speed: animationSpeed,
+    setSpeed: setAnimationSpeed,
+    algorithm: selectedAlgorithm,
+    setAlgorithm: setSelectedAlgorithm
+  };
+
+  function runAlgorithm() {
+    if (controls.algorithm === "") {
+      alert("Por favor selecciona un algoritmo primero.");
+      return;
+    }
+    else {
+      console.log("Array size: %s, Speed: %s, Algorithm: %s", controls.size, controls.speed, controls.algorithm);
+    }
+    // Aquí irá la ejecución real más adelante...
+  }
+
   return (
     <>
       <SidebarApp
-        sizeValue={arraySize}
-        handleSizeChange={setArraySize}
-        speedValue={animationSpeed}
-        handleSpeedChange={setAnimationSpeed}
-        resetArray = {resetArray}
+        controls={controls}
+        resetArray={resetArray}
+        runAlgorithm={runAlgorithm}
       />
       <CanvasComponent array={array}></CanvasComponent>
     </>

@@ -4,13 +4,19 @@ import SidebarActions from "./SidebarActions.jsx";
 import SidebarAlgorithms from "./SidebarAlgorithms.jsx";
 import SidebarParameters from "./SidebarParameters.jsx";
 
-function SidebarApp({
-  sizeValue,
-  handleSizeChange,
-  speedValue,
-  handleSpeedChange,
-  resetArray
-}) {
+function SidebarApp({ controls, resetArray, runAlgorithm }) {
+  //Destructuring the objects:
+  const { size, setSize, speed, setSpeed, algorithm, setAlgorithm } = controls;
+
+  //Refactor to the buttons:
+  const algorithmsList = [
+    "Bubble Sort",
+    "Insertion Sort",
+    "Merge Sort",
+    "Quick Sort",
+    "Radix Sort"
+  ];
+
   return (
     <div
       className="sidebarComponent"
@@ -20,7 +26,7 @@ function SidebarApp({
     >
       {/* Sidebar Header, with the logo and stuff */}
       <SidebarHeader></SidebarHeader>
-      
+
       {/* Section with the algorithms selector */}
       <section>
         <div className="sidebarAlgorithms">
@@ -29,12 +35,16 @@ function SidebarApp({
             <p>ALGORITHMS</p>
           </h4>
 
-          <SidebarAlgorithms value="Insertion Sort"></SidebarAlgorithms>
-          <SidebarAlgorithms value="Bubble Sort"></SidebarAlgorithms>
-          <SidebarAlgorithms value="Insertion Sort"></SidebarAlgorithms>
-          <SidebarAlgorithms value="Merge Sort"></SidebarAlgorithms>
-          <SidebarAlgorithms value="Quick Sort"></SidebarAlgorithms>
-          <SidebarAlgorithms value="Radix Sort"></SidebarAlgorithms>
+          <div className="sidebarAlgorithmsList">
+            {algorithmsList.map((algoName, index) => (
+              <SidebarAlgorithms
+                key={index}
+                value={algoName}
+                algorithm={algorithm}
+                setAlgorithm={setAlgorithm}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -43,12 +53,12 @@ function SidebarApp({
         <h1>Hello</h1>
         {/* Array Size */}
         <SidebarParameters
-          sliderValue={sizeValue}
+          sliderValue={size}
           label={"Array Size"}
           minValue={10}
           maxValue={100}
           step={10}
-          handleChange={handleSizeChange}
+          handleChange={setSize}
         ></SidebarParameters>
 
         {/* Speed of the animations */}
@@ -57,15 +67,15 @@ function SidebarApp({
           minValue={1}
           maxValue={5}
           step={1}
-          sliderValue={speedValue}
-          handleChange={handleSpeedChange}
+          sliderValue={speed}
+          handleChange={setSpeed}
         ></SidebarParameters>
       </section>
 
       {/* Section dedicated to te actions of the sidebar, run, step by step, reset array, etc */}
       <section
       >
-        <SidebarActions resetArrayOnClick = {resetArray}></SidebarActions>
+        <SidebarActions resetArrayOnClick={resetArray} runAlgorithmOnClick={runAlgorithm}></SidebarActions>
       </section>
     </div>
   );

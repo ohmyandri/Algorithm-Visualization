@@ -32,12 +32,24 @@
 }
 
 .algoButton {
+  cursor: pointer;
   color: white;
+}
+
+.algoButton.selected {
+  background-color: rgb(13, 101, 242, 0.1);
+  border-left: 2px solid rgb(13, 101, 242);
 }
 
 .sidebarAlgorithms {
   display: flex;
   flex-direction: column;
+}
+
+.sidebarAlgorithmsList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .sidebarAlgorithms button {
