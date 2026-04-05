@@ -1,0 +1,21 @@
+.canvas {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-grow: 1;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: center;
+
+  gap: 2px;
+  width: 100px;
+  height: 100%;
+}
+
+.arrayBar {
+  background-color: red;
+  flex: 1;
+  overflow: hidden;
+  text-align: center;
+  font-size: 10px;
+}

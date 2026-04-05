@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import "./CanvasComponent.css";
 export default function CanvasComponent({array}) {
   return (
     <div className="canvas">

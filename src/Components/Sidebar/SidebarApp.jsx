@@ -1,8 +1,9 @@
 import SidebarActions from "./SidebarActions.jsx";
 import SidebarAlgorithms from "./SidebarAlgorithms.jsx";
 import SidebarParameters from "./SidebarParameters.jsx";
+import "./SidebarApp.css";
 
-function SidebarApp({ controls, resetArray, runAlgorithm }) {
+function SidebarApp({ controls, resetArray, runAlgorithm, closeSidebar }) {
   //Destructuring the objects:
   const { size, setSize, speed, setSpeed, algorithm, setAlgorithm, runningState } = controls;
 
@@ -25,9 +26,13 @@ function SidebarApp({ controls, resetArray, runAlgorithm }) {
       {/* Section with the algorithms selector */}
       <section>
         <div className="sidebarAlgorithms">
-          <div className="sidebarAlgorithmsTitle">
-            <span className="material-symbols-outlined">memory</span>
-            <h1>ALGORITHMS</h1>
+          <div 
+            className="sidebarAlgorithmsTitle interactiveClose" 
+            onClick={closeSidebar}
+            title="Close Settings"
+          >
+            <span className="material-symbols-outlined">settings</span>
+            <h1>SETTINGS</h1>
           </div>
 
           <div className="sidebarAlgorithmsList">

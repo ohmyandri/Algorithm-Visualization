@@ -1,0 +1,121 @@
+/* Floating Settings Button */
+.floatingSettingsBtn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 1000;
+  background-color: #262a33;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.floatingSettingsBtn:hover {
+  background-color: #323743;
+  transform: translateY(-2px) rotate(45deg);
+  border-color: #7e55f6;
+  box-shadow: 0 6px 12px rgba(126, 85, 246, 0.5);
+}
+
+.floatingSettingsBtn span {
+  font-size: 28px;
+}
+
+/* =======================================
+   ANIMACIONES DE ERROR Y BLOQUEO DEL UI
+======================================= */
+.floatingSettingsBtn.locked {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Prevenimos que el hover modifique su transform cuando está bloqueado */
+.floatingSettingsBtn.locked:hover {
+  transform: none;
+  background-color: #262a33;
+  border-color: transparent;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.floatingSettingsBtn.shakeError {
+  animation: shakeBtnAnimation 0.4s cubic-bezier(.36,.07,.19,.97) both;
+  background-color: #ff4757 !important;
+  color: white;
+  border-color: #ff4757 !important;
+  box-shadow: 0 0 15px rgba(255, 71, 87, 0.6) !important;
+}
+
+@keyframes shakeBtnAnimation {
+  10%, 90% { transform: translate3d(-2px, 0, 0) rotate(-5deg); }
+  20%, 80% { transform: translate3d(4px, 0, 0) rotate(5deg); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0) rotate(-8deg); }
+  40%, 60% { transform: translate3d(6px, 0, 0) rotate(8deg); }
+}
+
+/* Backdrop Overlay */
+.sidebarBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 900;
+  cursor: pointer;
+}
+
+/* Sidebar Animated Wrapper (Push on Desktop) */
+.sidebarWrapper {
+  position: relative; /* Change from absolute to relative to interact with Flexbox */
+  height: 100vh;
+  z-index: 1000;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 0;
+  flex-shrink: 0; /* Prevents the sidebar from getting squished */
+}
+
+/* When closed on Desktop, pull left negative to free up space for Canvas */
+.sidebarWrapper.closed {
+  margin-left: -320px;
+}
+
+/* Hide backdrop visual but KEEP functional on Desktop so it traps clicks */
+@media (min-width: 769px) {
+  .sidebarBackdrop {
+    background: transparent;
+    backdrop-filter: none;
+  }
+}
+
+/* Mobile media queries */
+@media (max-width: 768px) {
+  .sidebarWrapper {
+    position: fixed; /* Becomes a floating modal instead of flex pushing */
+    top: 0;
+    left: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .sidebarWrapper.closed {
+    margin-left: 0; /* Override Desktop behavior */
+    transform: translateX(-110%);
+  }
+
+  .sidebarWrapper.open {
+    margin-left: 0;
+    transform: translateX(0);
+  }
+
+  .sidebarComponent {
+    width: 85vw;
+  }
+}
