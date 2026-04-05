@@ -1,33 +1,30 @@
-# Algorithm Visualization Tool 📊
+# Sorting Algorithm Visualizer
 
-An interactive web visualization tool designed to help developers and students understand how classic sorting algorithms work under the hood. Built with React, this tool allows users to control animation speeds, dynamically resize datasets, and visualize real-time DOM manipulations.
+Hi! This is a personal project I've been building to better understand how classic sorting algorithms actually work under the hood. I built it using React and vanilla CSS because I wanted to practice asynchronous logic and state management. 
 
-## Features ✨
+## What it does
 
-- **Real-time Animations:** Watch arrays get sorted frame-by-frame with dynamic color highlighting for pivots, comparisons, and sorted areas.
-- **Interactive Configurations:** A smooth, responsive settings sidebar allows you to tweak array sizes and algorithm speeds on the fly.
-- **Multiple Algorithms Supported:**
-  - 🫧 **Bubble Sort**
-  - 🎯 **Insertion Sort**
-  - ⚡ **Quick Sort** (Lomuto Partition implementation)
-  - 🔀 **Merge Sort** (Out-of-place shadow arrays)
-- **Responsive & Mobile Ready:** Features floating interactive buttons, CSS modal transitions, and adaptive layouts for any screen.
+The application gives you visual feedback on how an array of random heights is sorted over time. It currently supports:
 
-## Tech Stack 🛠️
+- Bubble Sort
+- Insertion Sort
+- Quick Sort
+- Merge Sort
 
-- **Library:** React (Vite)
-- **Styling:** Vanilla CSS (Flexbox, conditional media queries, glassmorphism)
-- **Animation Engine:** Custom `async/await` JavaScript sleep controllers manipulating the DOM directly for optimal performance.
+You can control the animation speed and the overall size of the array through a responsive sidebar. The interface is completely mobile-friendly and handles interactions cleanly.
 
-## Future Roadmap & Next Steps 🚀
+## Tech Stack
 
-This personal project started as a raw logical challenge to execute and display mathematical sorting over the DOM. 
+This project was built primarily with:
+- React (via Vite)
+- Standard CSS for everything (Flexbox, media queries, and animations)
+- Custom Javascript asynchronous helpers using async/await to simulate the visual frames.
 
-The **next immediate step** in this project's evolution is a massive **Architectural Refactor** to align with Clean Code and Senior scalability standards. As the app has grown, the core component has started accumulating too many responsibilities (The "God Component" anti-pattern). 
+## What's next? (Roadmap)
 
-The upcoming goals to restructure the software architecture are:
-1. **Extraction of Domain Logic:** Isolate mathematical procedures, array generation, and async states into pure, abstract Custom Hooks (e.g., `useAlgorithmEngine`).
-2. **CSS Modularization:** Dismantle the monolithic global stylesheet into component-scoped `.css` modules to guarantee the "Proximity Principle".
-3. **Pure Views:** Ensure UI components (`SortingVisualizer`, `Canvas`) act strictly as presentation layers that are completely oblivious to the heavy business logic.
+To date, the project does exactly what it needs to visually, but the internal code structure has gotten a bit bloated. Right now, the main visualizer component handles way too much at once (generating random numbers, managing UI state, and running the sorting algorithms). 
 
-*By establishing this Feature-Based Architecture, the application will be highly maintainable and perfectly suited for future expansions like an interactive "Step-by-Step execution" mode.*
+My main priority moving forward is to perform a proper **Architectural Refactor** to follow cleaner programming conventions:
+1. **Separation of Concerns:** Moving all the heavy logic and algorithm executions out of the visual components and into custom React Hooks.
+2. **Modularizing CSS:** I plan to break my single global stylesheet into smaller, component-level CSS files so the code is easier to maintain.
+3. Having a decoupled codebase will make it much easier to eventually build more complex features, such as an interactive "Step-by-step" mode.
