@@ -10,9 +10,8 @@ function SidebarApp({ controls, resetArray, runAlgorithm }) {
   const algorithmsList = [
     "Bubble Sort",
     "Insertion Sort",
-    "Merge Sort",
     "Quick Sort",
-    "Radix Sort"
+    "Merge Sort"
   ];
 
   return (
@@ -26,10 +25,10 @@ function SidebarApp({ controls, resetArray, runAlgorithm }) {
       {/* Section with the algorithms selector */}
       <section>
         <div className="sidebarAlgorithms">
-          <h4>
+          <div className="sidebarAlgorithmsTitle">
             <span className="material-symbols-outlined">memory</span>
-            <p>ALGORITHMS</p>
-          </h4>
+            <h1>ALGORITHMS</h1>
+          </div>
 
           <div className="sidebarAlgorithmsList">
             {algorithmsList.map((algoName, index) => (
@@ -46,7 +45,7 @@ function SidebarApp({ controls, resetArray, runAlgorithm }) {
 
       {/* Section with the parameters selector */}
       <section>
-        <h1>Hello</h1>
+        <h1>CONFIGURATION</h1>
         {/* Array Size */}
         <SidebarParameters
           sliderValue={size}

@@ -3,6 +3,8 @@ import CanvasComponent from "./CanvasComponent.jsx";
 import SidebarApp from "../Sidebar/SidebarApp.jsx";
 import { bubbleSort } from "../../../Helpers/BubbleSort.js";
 import { insertionSort } from "../../../Helpers/InsertionSort.js";
+import { mergeSort } from "../../../Helpers/MergeSort.js";
+import { quickSort } from "../../../Helpers/QuickSort.js";
 
 export default function SortingVisualizer() {
   //UseState to make it easier deactivate buttons when algorithm is running
@@ -64,6 +66,14 @@ export default function SortingVisualizer() {
 
       case "Insertion Sort":
         await insertionSort(array, animationSpeed);
+        break;
+
+      case "Quick Sort":
+        await quickSort(array, animationSpeed);
+        break;
+
+      case "Merge Sort":
+        await mergeSort(array, animationSpeed);
         break;
 
       default:
