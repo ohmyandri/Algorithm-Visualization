@@ -42,6 +42,12 @@ export function useAlgorithmEngine() {
   //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arraySize]);
 
+  //Effect to recalculate when the algorithm selected changes
+  useEffect(() => {
+    resetArray();
+  //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAlgorithm]);
+
   //Unified controls packed so UI components can send them easily as Props
   const controls = {
     size: arraySize,
