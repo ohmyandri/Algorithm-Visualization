@@ -3,6 +3,7 @@ import { bubbleSort } from "../utils/algorithms/BubbleSort.js";
 import { insertionSort } from "../utils/algorithms/InsertionSort.js";
 import { mergeSort } from "../utils/algorithms/MergeSort.js";
 import { quickSort } from "../utils/algorithms/QuickSort.js";
+import { executionController } from "../utils/algorithms/sleepHelper.js";
 
 //Pure mathematical utility functions
 //https://stackoverflow.com/questions/71327425/best-choice-for-javascript-random-number-generator
@@ -22,6 +23,7 @@ export function useAlgorithmEngine() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState("");
   const [arraySize, setArraySize] = useState(10);
   const [animationSpeed, setAnimationSpeed] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
 
   //Pure Logic Functions
   function resetArray() {
@@ -34,6 +36,11 @@ export function useAlgorithmEngine() {
         bar.style.backgroundColor = "turquoise";
     });
     setArray(newArray);
+    
+    // Reset and abort any running algorithm
+    executionController.abort();
+    setIsRunning(false);
+    setIsPaused(false);
   }
 
   //Effect to recalculate when the selected size changes
@@ -57,37 +64,69 @@ export function useAlgorithmEngine() {
     algorithm: selectedAlgorithm,
     setAlgorithm: setSelectedAlgorithm,
     runningState: isRunning,
-    setRunningState: setIsRunning
+    setRunningState: setIsRunning,
+    isPaused,
+    
+    // Execution Controls
+    pause: () => {
+      executionController.pause();
+      setIsPaused(true);
+    },
+    resume: () => {
+      executionController.resume();
+      setIsPaused(false);
+    },
+    step: () => {
+      executionController.step();
+    }
   };
 
   //Modular Executors
-  async function runAlgorithm() {
-    setIsRunning(true);
+  async function runAlgorithm(startPaused = false) {
+    if (!controls.algorithm) {
+      alert("Please select an algorithm first.");
+      return;
+    }
 
-    switch (controls.algorithm) {
-      case "Bubble Sort":
-        await bubbleSort(array, animationSpeed);
-        break;
-      case "Insertion Sort":
-        await insertionSort(array, animationSpeed);
-        break;
-      case "Quick Sort":
-        await quickSort(array, animationSpeed);
-        break;
-      case "Merge Sort":
-        await mergeSort(array, animationSpeed);
-        break;
-      default:
-        alert("Please select an algorithm first.");
-        break;
+    setIsRunning(true);
+    setIsPaused(startPaused);
+    executionController.reset();
+
+    if (startPaused) {
+      executionController.pause();
+    }
+
+    try {
+      switch (controls.algorithm) {
+        case "Bubble Sort":
+          await bubbleSort(array, animationSpeed);
+          break;
+        case "Insertion Sort":
+          await insertionSort(array, animationSpeed);
+          break;
+        case "Quick Sort":
+          await quickSort(array, animationSpeed);
+          break;
+        case "Merge Sort":
+          await mergeSort(array, animationSpeed);
+          break;
+      }
+    } catch (e) {
+      if (e.message === "Algorithm aborted") {
+        console.log("Algorithm execution stopped cleanly.");
+      } else {
+        console.error(e);
+      }
     }
 
     setIsRunning(false);
+    setIsPaused(false);
   }
 
   //Output: The only thing the visual interface can touch to connect to its gears
   return {
     array,
+    setArray,
     controls,
     isRunning,
     resetArray,

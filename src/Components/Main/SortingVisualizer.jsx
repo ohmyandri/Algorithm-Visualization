@@ -8,6 +8,7 @@ export default function SortingVisualizer() {
   //Extracting all the mathematical logic from our custom hook (Domain Logic)
   const {
     array,
+    setArray,
     controls,
     isRunning,
     resetArray,
@@ -16,28 +17,20 @@ export default function SortingVisualizer() {
 
   //Specific rendering states dedicated purely to the Visual Layer (UI Presentation)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isErrorShaking, setIsErrorShaking] = useState(false);
 
-  const handleRunAlgorithm = async () => {
-    setIsSidebarOpen(false);
-    await runAlgorithm();
+  const handleRunAlgorithm = async (startPaused = false) => {
+    await runAlgorithm(startPaused);
   };
 
   return (
     <>
       {!isSidebarOpen && (
         <button
-          className={`floatingSettingsBtn ${isErrorShaking ? "shakeError" : ""} ${isRunning ? "locked" : ""}`}
+          className="floatingSettingsBtn"
           onClick={() => {
-            if (isRunning) {
-              //Triggers the purely visual error vibration
-              setIsErrorShaking(true);
-              setTimeout(() => setIsErrorShaking(false), 400); //Turns off CSS animation in 400ms
-            } else {
-              setIsSidebarOpen(true);
-            }
+            setIsSidebarOpen(true);
           }}
-          title={isRunning ? "Locked during execution" : "Open Settings"}
+          title="Open Settings"
         >
 
           <span className="material-symbols-outlined">settings</span>
@@ -62,7 +55,7 @@ export default function SortingVisualizer() {
         />
       </div>
 
-      <CanvasComponent array={array}></CanvasComponent>
+      <CanvasComponent array={array} setArray={setArray} isRunning={isRunning}></CanvasComponent>
     </>
   );
 }

@@ -17,7 +17,7 @@ function SidebarApp({ controls, resetArray, runAlgorithm, closeSidebar }) {
 
   return (
     <div
-      className={`sidebarComponent ${runningState ? "disabled-ui" : ""}`}
+      className="sidebarComponent"
       style={{
         padding: "25px 24px",
       }}
@@ -74,7 +74,11 @@ function SidebarApp({ controls, resetArray, runAlgorithm, closeSidebar }) {
 
       {/* Section dedicated to te actions of the sidebar, run, step by step, reset array, etc */}
       <section>
-        <SidebarActions resetArrayOnClick={resetArray} runAlgorithmOnClick={runAlgorithm}></SidebarActions>
+        <SidebarActions 
+          resetArrayOnClick={resetArray} 
+          runAlgorithmOnClick={runAlgorithm}
+          controls={controls}
+        />
       </section>
     </div>
   );
